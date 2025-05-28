@@ -1,0 +1,65 @@
+# requirements.txt
+Flask==2.3.3
+Flask-CORS==4.0.0
+requests==2.31.0
+python-dotenv==1.0.0
+schedule==1.2.0
+feedparser==6.0.10
+gunicorn==21.2.0
+
+# Procfile (for Railway/Heroku)
+web: gunicorn ai_news_monitor:app
+
+# railway.toml (for Railway deployment)
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn ai_news_monitor:app"
+
+# render.yaml (for Render deployment)
+services:
+- type: web
+  name: ai-news-monitor
+  env: python
+  buildCommand: pip install -r requirements.txt
+  startCommand: gunicorn ai_news_monitor:app
+  envVars:
+  - key: PUSHOVER_TOKEN
+    sync: false
+  - key: PUSHOVER_USER  
+    sync: false
+  - key: WEBHOOK_URL
+    sync: false
+  - key: GOOGLE_API_KEY
+    sync: false
+
+# docker-compose.yml (for local Docker testing)
+version: '3.8'
+services:
+  ai-news-monitor:
+    build: .
+    ports:
+      - "5006:5006"
+    environment:
+      - PUSHOVER_TOKEN=${PUSHOVER_TOKEN}
+      - PUSHOVER_USER=${PUSHOVER_USER}
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - ./ai_news.db:/app/ai_news.db
+
+# Dockerfile
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5006
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5006", 
+"ai_news_monitor:app"]
