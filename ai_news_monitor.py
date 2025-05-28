@@ -871,4 +871,4 @@ if __name__ == '__main__':
         
     except Exception as e:
         print("❌ Startup error: " + str(e))
-        print("Check your configuration and try again")
+        print("Check your configuration and try again")git push -u origin main
