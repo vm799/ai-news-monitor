@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-=======
-# requirements.txt
->>>>>>> 28dcf5563ea1c3597b193168ad64508483d6a584
 Flask==2.3.3
 Flask-CORS==4.0.0
 requests==2.31.0
 python-dotenv==1.0.0
 schedule==1.2.0
 feedparser==6.0.10
-<<<<<<< HEAD
 gunicorn==21.2.0
-=======
-gunicorn==21.2.0
->>>>>>> 28dcf5563ea1c3597b193168ad64508483d6a584
