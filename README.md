@@ -25,7 +25,7 @@ An enterprise-grade news monitoring solution that aggregates content from multip
 
 ### 📱 **Multi-Channel Delivery**
 - **Email briefings** - Daily/hourly personalized newsletters
-- **Slack integration** - Real-time alerts to team channels
+- **Slack/Teams  integration** - Real-time alerts to team channels
 - **Mobile notifications** - Push alerts for breaking news
 - **API endpoints** - RESTful API for custom integrations
 - **Web dashboard** - Modern React interface for content management
